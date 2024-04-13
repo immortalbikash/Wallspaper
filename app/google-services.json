@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1099254246934",
+    "project_id": "wallspaper-edaec",
+    "storage_bucket": "wallspaper-edaec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099254246934:android:679642f59f378849660f37",
+        "android_client_info": {
+          "package_name": "com.example.wallspaper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeBtIa3SAfQcVIFRPhuFnKy3f6f65BkHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
