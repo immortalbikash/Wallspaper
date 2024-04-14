@@ -41,6 +41,15 @@ public class TrendingActivity extends AppCompatActivity {
             }
         });
 
+        latest = findViewById(R.id.btnLatest);
+        latest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TrendingActivity.this, LatestActivity.class);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = findViewById(R.id.rvTRecycler);
 
         ArrayList<TrendingModel> list = new ArrayList<>();
