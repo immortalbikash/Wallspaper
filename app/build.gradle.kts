@@ -42,4 +42,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //recycler view dependency
+//    implementation "androidx.recyclerview:recyclerview:1.3.2"
 }

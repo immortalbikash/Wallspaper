@@ -11,8 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wallspaper.Adapters.PopularAdapter;
+import com.example.wallspaper.Model.PopularModel;
+
+import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
 
     private Button latest, popular, trending;
     private ImageView image;
@@ -23,35 +32,49 @@ public class DashboardActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
 
-        trending = findViewById(R.id.btnTrending);
-        latest = findViewById(R.id.btnLatest);
+        recyclerView = findViewById(R.id.rvRecycler);
 
-        image = findViewById(R.id.imageView);
+        ArrayList<PopularModel> list = new ArrayList<>();
+        list.add(new PopularModel(R.drawable.i1));
+        list.add(new PopularModel(R.drawable.i2));
+        list.add(new PopularModel(R.drawable.dark));
+        list.add(new PopularModel(R.drawable.doughnut));
+        list.add(new PopularModel(R.drawable.food1));
+        list.add(new PopularModel(R.drawable.food2));
+        list.add(new PopularModel(R.drawable.food3));
 
-        latest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, LatestActivity.class);
-                startActivity(intent);
-            }
-        });
+        PopularAdapter adapter = new PopularAdapter(list, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        trending = findViewById(R.id.btnTrending);
+//        latest = findViewById(R.id.btnLatest);
+//
+//        image = findViewById(R.id.imageView);
 
-        trending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, TrendingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, Details.class);
-                startActivity(intent);
-            }
-        });
+//        latest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DashboardActivity.this, LatestActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        trending.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DashboardActivity.this, TrendingActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//
+//        image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(DashboardActivity.this, Details.class);
+//                startActivity(intent);
+//            }
+//        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
