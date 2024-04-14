@@ -32,6 +32,26 @@ public class DashboardActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
 
+        latest = findViewById(R.id.btnLatest);
+
+        trending = findViewById(R.id.btnTrending);
+        trending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, TrendingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        latest = findViewById(R.id.btnLatest);
+        latest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, LatestdetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = findViewById(R.id.rvRecycler);
 
         ArrayList<PopularModel> list = new ArrayList<>();
@@ -46,35 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
         PopularAdapter adapter = new PopularAdapter(list, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-//        trending = findViewById(R.id.btnTrending);
-//        latest = findViewById(R.id.btnLatest);
-//
-//        image = findViewById(R.id.imageView);
 
-//        latest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DashboardActivity.this, LatestActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        trending.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DashboardActivity.this, TrendingActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//
-//        image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(DashboardActivity.this, Details.class);
-//                startActivity(intent);
-//            }
-//        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
