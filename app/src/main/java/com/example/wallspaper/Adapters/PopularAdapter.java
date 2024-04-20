@@ -1,6 +1,7 @@
 package com.example.wallspaper.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +10,30 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.wallspaper.DashboardActivity;
 import com.example.wallspaper.Details;
+import com.example.wallspaper.Model.DataClass;
 import com.example.wallspaper.Model.PopularModel;
 import com.example.wallspaper.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.viewHolder> {
 
-    ArrayList<PopularModel> list;
+    ArrayList<DataClass> list;
     Context context;
 
-    public PopularAdapter(ArrayList<PopularModel> list,Context context){
+
+    public PopularAdapter(ArrayList<DataClass> list,Context context){
         this.list =list;
         this.context = context;
     }
@@ -37,15 +47,26 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.viewHold
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapter.viewHolder holder, int position) {
-        PopularModel model = list.get(position);
-        holder.image.setImageResource(model.getPic());
-
+//        Toast.makeText(context, list.size(), Toast.LENGTH_SHORT).show();
+        Glide.with(context).load(list.get(position).getImageUrl()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Details.class);
-                intent.putExtra("image", model.getPic());
+                intent.putExtra("image", list.get(position).getImageUrl());
+//                Toast.makeText(context, list.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
+            }
+        });
+
+        holder.image.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String key = list.get(position).getKey();
+                FirebaseDatabase.getInstance().getReference("Images").child(key).removeValue();
+                Toast.makeText(context, "Image deleted", Toast.LENGTH_SHORT).show();
+                ((DashboardActivity) context).recreate();
+                return  true;
             }
         });
     }
