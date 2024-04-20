@@ -32,15 +32,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@drawable/addimg" />
 
-    <Spinner
-        android:id="@+id/spImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivUpload" />
-
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="wrap_content"
@@ -49,7 +40,7 @@
         android:text="Upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spImg" />
+        app:layout_constraintTop_toBottomOf="@+id/ivUpload" />
 
     <ProgressBar
         android:id="@+id/progressbar"

@@ -38,7 +38,6 @@ import com.google.firebase.storage.UploadTask;
 
 public class AddimageActivity extends AppCompatActivity {
 
-    private Spinner spinner;
     private ImageView uploadImage;
     private Button upload;
 
@@ -59,22 +58,7 @@ public class AddimageActivity extends AppCompatActivity {
         upload = findViewById(R.id.btnUpload);
         progressBar = findViewById(R.id.progressbar);
 
-        spinner = findViewById(R.id.spImg);
-        String types[] = {"Popular", "Trending", "Latest"};
-        ArrayAdapter adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                types
-        );
-        spinner.setAdapter(adapter);
 
-//        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String spi_data = spinner.getSelectedItem().toString();
-//                Toast.makeText(this, spi_data, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         progressBar.setVisibility(View.INVISIBLE);
 
@@ -116,10 +100,6 @@ public class AddimageActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        String spi_data = spinner.getSelectedItem().toString();
-//        Toast.makeText(this, spi_data, Toast.LENGTH_SHORT).show();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

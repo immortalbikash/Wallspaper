@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,8 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wallspaper.Adapters.LatestAdapter;
 import com.example.wallspaper.Adapters.PopularAdapter;
+import com.example.wallspaper.Model.DataClass;
 import com.example.wallspaper.Model.LatestModel;
 import com.example.wallspaper.Model.PopularModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -26,6 +34,13 @@ public class LatestActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private Button latest, popular, trending;
+
+    private ArrayList<DataClass> list;
+    private LatestAdapter adapter;
+
+    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Latest");
+    private FirebaseStorage firebaseStorage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +54,7 @@ public class LatestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LatestActivity.this, DashboardActivity.class);
                 startActivity(intent);
+                LatestActivity.this.finish();
             }
         });
 
@@ -48,20 +64,37 @@ public class LatestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LatestActivity.this, TrendingActivity.class);
                 startActivity(intent);
+                LatestActivity.this.finish();
             }
         });
 
 
         recyclerView = findViewById(R.id.rvLRecycler);
-        ArrayList<LatestModel> list = new ArrayList<>();
-        list.add(new LatestModel(R.drawable.food3));
-        list.add(new LatestModel(R.drawable.i2));
-        list.add(new LatestModel(R.drawable.doughnut));
-        list.add(new LatestModel(R.drawable.food1));
-
-        LatestAdapter adapter = new LatestAdapter(list, this);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        list = new ArrayList<>();
+        firebaseStorage = FirebaseStorage.getInstance();
+
+        adapter = new LatestAdapter(list, this);
+        recyclerView.setAdapter(adapter);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    DataClass dataClass = dataSnapshot.getValue(DataClass.class);
+                    dataClass.setKey(dataSnapshot.getKey());
+                    list.add(dataClass);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

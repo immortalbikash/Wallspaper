@@ -86,6 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, AddimageActivity.class);
                 startActivity(intent);
+                DashboardActivity.this.finish();
             }
         });
 
@@ -94,6 +95,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, TrendingActivity.class);
                 startActivity(intent);
+                DashboardActivity.this.finish();
             }
         });
 
@@ -102,6 +104,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, LatestActivity.class);
                 startActivity(intent);
+                DashboardActivity.this.finish();
             }
         });
 

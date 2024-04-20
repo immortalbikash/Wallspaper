@@ -41,6 +41,7 @@ public class Details extends AppCompatActivity {
                     Toast.makeText(Details.this, "Wallspaper set sucessfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Details.this, DashboardActivity.class);
                     startActivity(intent);
+                    Details.this.finish();
                 }
                 catch (Exception g){
                     g.printStackTrace();

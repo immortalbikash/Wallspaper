@@ -6,23 +6,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.wallspaper.DashboardActivity;
 import com.example.wallspaper.Details;
+import com.example.wallspaper.LatestActivity;
+import com.example.wallspaper.Model.DataClass;
 import com.example.wallspaper.Model.LatestModel;
 import com.example.wallspaper.Model.PopularModel;
 import com.example.wallspaper.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.viewHolder> {
 
-    ArrayList<LatestModel> list;
+    ArrayList<DataClass> list;
     Context context;
 
-    public LatestAdapter(ArrayList<LatestModel> list,Context context){
+    public LatestAdapter(ArrayList<DataClass> list, Context context){
         this.list =list;
         this.context = context;
     }
@@ -35,15 +41,25 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.viewHolder
 
     @Override
     public void onBindViewHolder(@NonNull LatestAdapter.viewHolder holder, int position) {
-        LatestModel model = list.get(position);
-        holder.image.setImageResource(model.getPic());
-
+        Glide.with(context).load(list.get(position).getImageUrl()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Details.class);
-                intent.putExtra("image", model.getPic());
+                intent.putExtra("image", list.get(position).getImageUrl());
+//                Toast.makeText(context, list.get(position).getImageUrl(), Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
+            }
+        });
+
+        holder.image.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String key = list.get(position).getKey();
+                FirebaseDatabase.getInstance().getReference("Latest").child(key).removeValue();
+                Toast.makeText(context, "Image deleted", Toast.LENGTH_SHORT).show();
+                ((LatestActivity) context).recreate();
+                return  true;
             }
         });
     }
