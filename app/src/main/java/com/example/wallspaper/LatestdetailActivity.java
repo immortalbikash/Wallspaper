@@ -26,12 +26,12 @@ public class LatestdetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_latestdetail);
 
-        recyclerView = findViewById(R.id.rvLRecycler);
-        ArrayList<LatestModel> list = new ArrayList<>();
-        list.add(new LatestModel(R.drawable.food3));
-        list.add(new LatestModel(R.drawable.dark));
-        list.add(new LatestModel(R.drawable.food1));
-        list.add(new LatestModel(R.drawable.doughnut));
+//        recyclerView = findViewById(R.id.rvLRecycler);
+//        ArrayList<LatestModel> list = new ArrayList<>();
+//        list.add(new LatestModel(R.drawable.food3));
+//        list.add(new LatestModel(R.drawable.dark));
+//        list.add(new LatestModel(R.drawable.food1));
+//        list.add(new LatestModel(R.drawable.doughnut));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
