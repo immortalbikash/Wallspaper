@@ -69,8 +69,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.viewHo
                                 String key = list.get(position).getKey();
                                 FirebaseDatabase.getInstance().getReference("Trending").child(key).removeValue();
                                 Toast.makeText(context, "Image deleted", Toast.LENGTH_SHORT).show();
-                                ((DashboardActivity) context).recreate();
-                                Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
+                                ((TrendingActivity) context).recreate();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -73,7 +73,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.viewHold
                                                 FirebaseDatabase.getInstance().getReference("Images").child(key).removeValue();
                                                 Toast.makeText(context, "Image deleted", Toast.LENGTH_SHORT).show();
                                                 ((DashboardActivity) context).recreate();
-                                                Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

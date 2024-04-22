@@ -1,4 +1,4 @@
-package com.example.wallspaper;
+package com.example.wallspaper.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.wallspaper.DashboardActivity;
+import com.example.wallspaper.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

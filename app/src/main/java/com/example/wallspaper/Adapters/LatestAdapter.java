@@ -66,8 +66,7 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.viewHolder
                                 String key = list.get(position).getKey();
                                 FirebaseDatabase.getInstance().getReference("Latest").child(key).removeValue();
                                 Toast.makeText(context, "Image deleted", Toast.LENGTH_SHORT).show();
-                                ((DashboardActivity) context).recreate();
-                                Toast.makeText(context, "Yes", Toast.LENGTH_SHORT).show();
+                                ((LatestActivity) context).recreate();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
