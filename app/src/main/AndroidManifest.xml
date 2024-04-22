@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wallspaper"
         tools:targetApi="31">
+<!--        target 31-->
 
 
         <activity
